@@ -1,0 +1,20 @@
+{
+  "name": "devops_api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha --recursive test/unit",
+    "test:integration": "mocha --recursive test/integration"
+  },
+  "dependencies": {
+    "express": "~4.13.1",
+    "pg": "8.2.1",
+    "node-uuid": "1.4.7"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
+}
