@@ -7,11 +7,11 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "3teirnodeprod-sammy-bucket"  # Replace with your aws_s3_bucket
+    bucket         = "3teirnodeprod-sammy-bucket" # Replace with your aws_s3_bucket
     key            = "prod/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "3teirnodeprod-sammy-table"     # Replace with your DynamoDB table
+    dynamodb_table = "3teirnodeprod-sammy-table" # Replace with your DynamoDB table
   }
 }
 
@@ -30,10 +30,10 @@ provider "aws" {
 module "vpc" {
   source = "../../modules/vpc"
 
-  project_name       = var.project_name
-  environment        = var.environment
-  vpc_cidr           = var.vpc_cidr
- # availability_zones = var.availability_zones
+  project_name = var.project_name
+  environment  = var.environment
+  vpc_cidr     = var.vpc_cidr
+  # availability_zones = var.availability_zones
 }
 
 # ECR (container registry)
@@ -48,18 +48,18 @@ module "ecr" {
 module "database" {
   source = "../../modules/database"
 
-  project_name        = var.project_name
-  environment         = var.environment
-  vpc_id              = module.vpc.vpc_id
-  private_subnet_ids  = module.vpc.private_subnet_ids
-  db_subnet_group     = module.vpc.db_subnet_group_name
-  allowed_sg_ids      = [module.ecs.api_sg_id]
-  db_name             = var.db_name
-  db_username         = var.db_username
-  db_password         = var.db_password
-  backup_window       = "02:00-03:00"
-  maintenance_window  = "sun:04:00-sun:05:00"
-  backup_retention    = 7
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  db_subnet_group    = module.vpc.db_subnet_group_name
+  allowed_sg_ids     = [module.ecs.api_sg_id]
+  db_name            = var.db_name
+  db_username        = var.db_username
+  db_password        = var.db_password
+  backup_window      = "02:00-03:00"
+  maintenance_window = "sun:04:00-sun:05:00"
+  backup_retention   = 7
 }
 
 # ECS (Web + API tiers)
@@ -90,23 +90,23 @@ module "ecs" {
 module "cdn" {
   source = "../../modules/cdn"
 
-  project_name    = var.project_name
-  environment     = var.environment
-  web_alb_dns     = module.ecs.web_alb_dns_name
-  api_alb_dns     = module.ecs.api_alb_dns_name
+  project_name = var.project_name
+  environment  = var.environment
+  web_alb_dns  = module.ecs.web_alb_dns_name
+  api_alb_dns  = module.ecs.api_alb_dns_name
 }
 
 # Monitoring 
 module "monitoring" {
   source = "../../modules/monitoring"
 
-  project_name      = var.project_name
-  environment       = var.environment
-  web_alb_arn       = module.ecs.web_alb_arn
-  api_alb_arn       = module.ecs.api_alb_arn
-  ecs_cluster_name  = module.ecs.cluster_name
-  web_service_name  = module.ecs.web_service_name
-  api_service_name  = module.ecs.api_service_name
-  db_cluster_id     = module.database.cluster_id
-  alarm_email       = var.alarm_email
+  project_name     = var.project_name
+  environment      = var.environment
+  web_alb_arn      = module.ecs.web_alb_arn
+  api_alb_arn      = module.ecs.api_alb_arn
+  ecs_cluster_name = module.ecs.cluster_name
+  web_service_name = module.ecs.web_service_name
+  api_service_name = module.ecs.api_service_name
+  db_cluster_id    = module.database.cluster_id
+  alarm_email      = var.alarm_email
 }

@@ -130,7 +130,10 @@ resource "aws_cloudwatch_dashboard" "main" {
             ["AWS/ECS", "MemoryUtilization", "ClusterName", var.ecs_cluster_name, "ServiceName", var.web_service_name]
           ]
         }
-        x = 0; y = 0; width = 12; height = 6
+        x      = 0
+        y      = 0
+        width  = 12
+        height = 6
       },
       {
         type = "metric"
@@ -144,7 +147,10 @@ resource "aws_cloudwatch_dashboard" "main" {
             ["AWS/ECS", "MemoryUtilization", "ClusterName", var.ecs_cluster_name, "ServiceName", var.api_service_name]
           ]
         }
-        x = 12; y = 0; width = 12; height = 6
+        x      = 12
+        y      = 0
+        width  = 12
+        height = 6
       },
       {
         type = "metric"
@@ -160,7 +166,10 @@ resource "aws_cloudwatch_dashboard" "main" {
             ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", var.api_alb_arn, { stat = "p99" }]
           ]
         }
-        x = 0; y = 6; width = 12; height = 6
+        x      = 0
+        y      = 6
+        width  = 12
+        height = 6
       },
       {
         type = "metric"
@@ -176,7 +185,10 @@ resource "aws_cloudwatch_dashboard" "main" {
             ["AWS/RDS", "SelectLatency",      "DBClusterIdentifier", var.db_cluster_id]
           ]
         }
-        x = 12; y = 6; width = 12; height = 6
+        x      = 12
+        y      = 6
+        width  = 12
+        height = 6
       },
       {
         type = "metric"
@@ -192,7 +204,10 @@ resource "aws_cloudwatch_dashboard" "main" {
             ["AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", var.api_alb_arn]
           ]
         }
-        x = 0; y = 12; width = 24; height = 6
+        x      = 0
+        y      = 12
+        width  = 24
+        height = 6
       }
     ]
   })
