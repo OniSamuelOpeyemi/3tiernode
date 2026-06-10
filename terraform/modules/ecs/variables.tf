@@ -82,3 +82,8 @@ variable "api_alb_dns_placeholder" {
   type    = string
   default = "api-alb-placeholder"
 }
+
+variable "aws_region" {
+  description = "AWS region (passed from root module)"
+  type        = string
+}

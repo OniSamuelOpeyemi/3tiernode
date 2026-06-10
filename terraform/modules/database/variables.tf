@@ -31,6 +31,11 @@ variable "db_username" {
   sensitive = true
 }
 
+variable "db_password" {
+    type      = string
+    sensitive = true
+}
+
 variable "backup_window" {
   type    = string
   default = "02:00-03:00"

@@ -256,7 +256,7 @@ resource "aws_lb_target_group" "web" {
   target_type = "ip"
 
   health_check {
-    health_check        = true
+    enabled             = true
     path                = "/health"
     port                = "traffic-port"
     interval            = 30
@@ -277,7 +277,7 @@ resource "aws_lb_target_group" "api" {
   target_type = "ip"
 
   health_check {
-    enable              = true
+    enabled             = true
     path                = "/health"
     interval            = 30
     timeout             = 5

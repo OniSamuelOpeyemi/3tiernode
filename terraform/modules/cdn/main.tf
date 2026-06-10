@@ -38,7 +38,9 @@ resource "aws_cloudfront_distribution" "web" {
     forwarded_values {
       query_string = true
       headers      = ["Host", "Authorization", "Accept", "Accept-Language"]
-      cookies      = { forward = "all" }
+      cookies {
+        forward = "all"
+      }
     }
 
     min_ttl     = 0
@@ -57,7 +59,9 @@ resource "aws_cloudfront_distribution" "web" {
 
     forwarded_values {
       query_string = false
-      cookies      = { forward = "none" }
+      cookies {
+        forward = "none"
+      }
     }
 
     min_ttl     = 86400
@@ -116,7 +120,9 @@ resource "aws_cloudfront_distribution" "api" {
     forwarded_values {
       query_string = true
       headers      = ["*"]   # Forward all headers for API
-      cookies      = { forward = "all" }
+      cookies {
+        forward = "all"
+      }
     }
 
     min_ttl     = 0
