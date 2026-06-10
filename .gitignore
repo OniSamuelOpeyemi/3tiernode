@@ -2,6 +2,11 @@
 /node_modules
 /api/node_modules
 /web/node_modules
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Local environment files
 .env
@@ -30,12 +35,32 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Build artifacts
-dist
-build
 
-# Terraform variable files (if using Terraform for infrastructure)
-*.tfvars  
+# Terraform local files
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate
+.terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+*.tfvars
 *.tfvars.json
-terraform.tfstate
-tfplan
+*.tfvars.*
+*.tfplan
+*.tfplan.*
+override.tf
+override.tf.json
+*_override.tf
+crash.log
+.terraform.tfstate.d/
+
+# Misc
+.cache/
+.sass-cache/
+*.pid
+*.seed
+*.pid.lock
+.turbo/
+coverage/
+dist/
+build/
