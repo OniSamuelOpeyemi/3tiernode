@@ -228,10 +228,6 @@ jobs:
           context:   ./api
           file:      ./api/Dockerfile.api
           push:      true
-          cache-from: type=gha
-          cache-to:   type=gha,mode=max
-          tags: |
-            ${{ env.ECR_API_REPO }}:${{ steps.set_tag.outputs.tag }}
             ${{ env.ECR_API_REPO }}:latest
           labels: |
             org.opencontainers.image.revision=${{ github.sha }}
