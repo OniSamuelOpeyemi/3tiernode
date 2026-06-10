@@ -125,7 +125,7 @@ jobs:
         run: npm audit --audit-level=high || true
 
       - name: Run Snyk scan for web
-        if: ${{ secrets.SNYK_TOKEN != '' }}
+        if: ${{ env.SNYK_TOKEN != '' }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         working-directory: web
@@ -135,7 +135,7 @@ jobs:
           snyk test --severity-threshold=high
 
       - name: Run Snyk scan for api
-        if: ${{ secrets.SNYK_TOKEN != '' }}
+        if: ${{ env.SNYK_TOKEN != '' }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         working-directory: api

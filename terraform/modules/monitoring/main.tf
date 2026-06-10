@@ -112,7 +112,7 @@ resource "aws_cloudwatch_metric_alarm" "db_connections_high" {
   dimensions          = { DBClusterIdentifier = var.db_cluster_id }
 }
 
-# ─── CloudWatch Dashboard ─────────────────────────────────────────────────────
+# CloudWatch Dashboard 
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "${local.prefix}-overview"
 
@@ -121,7 +121,8 @@ resource "aws_cloudwatch_dashboard" "main" {
       {
         type = "metric"
         properties = {
-          title  = "ECS Web - CPU & Memory"
+          title    = "ECS Web - CPU & Memory"
+          region   = "us-east-1"
           period = 60
           stat   = "Average"
           view   = "timeSeries"
@@ -139,6 +140,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         type = "metric"
         properties = {
           title  = "ECS API - CPU & Memory"
+          region  = "us-east-1"
           period = 60
           stat   = "Average"
           view   = "timeSeries"
@@ -156,6 +158,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         type = "metric"
         properties = {
           title  = "ALB Request Count & Latency"
+          region  = "us-east-1"
           period = 60
           stat   = "Sum"
           view   = "timeSeries"
@@ -175,6 +178,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         type = "metric"
         properties = {
           title  = "Aurora - CPU, Connections, Latency"
+          region  = "us-east-1"
           period = 60
           stat   = "Average"
           view   = "timeSeries"
@@ -194,6 +198,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         type = "metric"
         properties = {
           title  = "HTTP Error Rates (4xx / 5xx)"
+          region  = "us-east-1"
           period = 60
           stat   = "Sum"
           view   = "timeSeries"
@@ -213,7 +218,7 @@ resource "aws_cloudwatch_dashboard" "main" {
   })
 }
 
-# ─── Container Insights log group ─────────────────────────────────────────────
+# Container Insights log group 
 resource "aws_cloudwatch_log_group" "ecs_insights" {
   name              = "/aws/ecs/containerinsights/${var.ecs_cluster_name}/performance"
   retention_in_days = 14

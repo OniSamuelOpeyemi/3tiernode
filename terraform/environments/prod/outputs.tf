@@ -37,3 +37,8 @@ output "db_endpoint" {
 output "ecs_cluster_name" {
   value = module.ecs.cluster_name
 }
+
+
+output "db_name" {
+  value = var.db_name
+}

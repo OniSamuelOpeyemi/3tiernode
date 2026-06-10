@@ -10,7 +10,7 @@
 
 ## First-Time Setup
 
-### 1. Bootstrap Terraform State
+### Bootstrap Terraform State
 
 ```bash
 # Create S3 bucket for state
@@ -33,7 +33,7 @@ aws dynamodb create-table \
 
 Update `terraform/environments/prod/main.tf` backend block with your bucket/table names.
 
-### 2. Deploy Infrastructure
+### Deploy Infrastructure
 
 ```bash
 cd terraform/environments/prod
@@ -49,7 +49,7 @@ Capture the outputs — you'll need them for GitHub secrets:
 terraform output
 ```
 
-### 3. Configure GitHub Secrets
+###  Configure GitHub Secrets
 
 In your repository → Settings → Secrets and variables → Actions, add:
 
@@ -67,7 +67,35 @@ In your repository → Settings → Secrets and variables → Actions, add:
 | `CLOUDFRONT_WEB_DOMAIN` | `terraform output cloudfront_web_domain` |
 | `CLOUDFRONT_API_DOMAIN` | `terraform output cloudfront_api_domain` |
 
-### 4. Push a commit to `main` to trigger the pipeline
+### Use scripts/sync-secrets.sh
+scripts/sync-secrets.sh let you sync your terraform output to Github secret
+
+### Make it executable
+``` bash 
+chmod +x scripts/sync-secrets.sh
+./scripts/sync-secrets.sh
+
+```
+### Before running, make sure you have;
+
+``` bash 
+# 1. gh CLI installed and authenticated
+gh auth login
+
+# 2. jq installed
+sudo apt install jq      # Ubuntu/Debian
+# or
+brew install jq          # Mac
+
+# 3. AWS CLI pointing to the right account
+aws sts get-caller-identity
+
+# 4. Terraform apply already completed
+cd terraform/environments/prod && terraform output
+
+```
+
+###  Push a commit to `main` to trigger the pipeline
 
 ---
 
