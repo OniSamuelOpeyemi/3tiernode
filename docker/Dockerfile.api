@@ -1,0 +1,29 @@
+# ─── Stage 1: Build ───────────────────────────────────────────────────────────
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY api/package*.json ./
+RUN npm ci --omit=dev
+
+COPY api/ ./
+
+# ─── Stage 2: Runtime ─────────────────────────────────────────────────────────
+FROM node:20-alpine AS runtime
+
+RUN addgroup -g 1001 -S nodejs && \
+    adduser  -S nodejs -u 1001 -G nodejs
+
+WORKDIR /app
+
+COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs /app .
+
+USER nodejs
+
+EXPOSE 3000
+
+# Health check matching ECS task definition
+# HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+#  CMD wget -qO- http://localhost:3000/health || exit 1
+
+CMD ["node", "bin/www"]
