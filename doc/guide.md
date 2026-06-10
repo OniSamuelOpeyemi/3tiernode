@@ -15,7 +15,7 @@
 ```bash
 # Create S3 bucket for state
 aws s3api create-bucket \
-  --bucket my-tfstate-bucket \
+  --bucket my-tfstate-bucket \   
   --region us-east-1
 
 aws s3api put-bucket-versioning \
@@ -83,6 +83,26 @@ Push to main
 ```
 
 The `deploy` job uses the GitHub **production** environment — configure manual approval gates there if required.
+
+----
+# Set up the production environment
+This enables the manual approval gate before deploy runs.
+
+Settings
+    ↓
+Environments (left sidebar)
+    ↓
+New environment
+    ↓
+Name it exactly: production
+    ↓
+Configure environment
+    ↓
+Check "Required reviewers"
+    ↓
+Add yourself as reviewer
+    ↓
+Save protection rules
 
 ---
 
