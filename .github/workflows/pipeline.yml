@@ -209,8 +209,8 @@ jobs:
         id: web_meta
         uses: docker/build-push-action@v5
         with:
-          context:   ./web
-          file:      ./web/Dockerfile
+          context:   ./docker
+          file:      ./docker/Dockerfile.web
           push:      true
           cache-from: type=gha
           cache-to:   type=gha,mode=max
@@ -225,8 +225,8 @@ jobs:
         id: api_meta
         uses: docker/build-push-action@v5
         with:
-          context:   ./api
-          file:      ./api/Dockerfile
+          context:   ./docker
+          file:      ./docker/Dockerfile.api
           push:      true
           cache-from: type=gha
           cache-to:   type=gha,mode=max
