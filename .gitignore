@@ -37,3 +37,5 @@ build
 # Terraform variable files (if using Terraform for infrastructure)
 *.tfvars  
 *.tfvars.json
+terraform.tfstate
+tfplan
