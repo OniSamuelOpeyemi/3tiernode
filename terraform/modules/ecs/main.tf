@@ -189,7 +189,7 @@ resource "aws_lb" "web" {
   security_groups    = [aws_security_group.web_alb.id]
   subnets            = var.public_subnet_ids
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
   enable_http2               = true
 
   access_logs {
@@ -206,7 +206,7 @@ resource "aws_lb" "api" {
   security_groups    = [aws_security_group.api_alb.id]
   subnets            = var.public_subnet_ids
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   access_logs {
     bucket  = aws_s3_bucket.alb_logs.bucket
