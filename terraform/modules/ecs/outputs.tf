@@ -1,0 +1,11 @@
+output "cluster_name"      { value = aws_ecs_cluster.main.name }
+output "cluster_arn"       { value = aws_ecs_cluster.main.arn }
+output "web_service_name"  { value = aws_ecs_service.web.name }
+output "api_service_name"  { value = aws_ecs_service.api.name }
+output "web_alb_dns_name"  { value = aws_lb.web.dns_name }
+output "api_alb_dns_name"  { value = aws_lb.api.dns_name }
+output "web_alb_arn"       { value = aws_lb.web.arn }
+output "api_alb_arn"       { value = aws_lb.api.arn }
+output "api_sg_id"         { value = aws_security_group.api_ecs.id }
+output "web_tg_arn"        { value = aws_lb_target_group.web.arn }
+output "api_tg_arn"        { value = aws_lb_target_group.api.arn }

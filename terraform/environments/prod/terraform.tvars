@@ -1,0 +1,4 @@
+alarm_email  = "oniesammy@gmail.com"    
+allowed_sg_ids = [
+  aws_security_group.ecs_service.id.api_ecs.id  
+]
