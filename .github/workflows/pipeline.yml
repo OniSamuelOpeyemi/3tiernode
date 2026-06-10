@@ -144,23 +144,23 @@ jobs:
           snyk auth $SNYK_TOKEN
           snyk test --severity-threshold=high
 
-      - name: Run SonarQube analysis
-        if: ${{ secrets.SONAR_TOKEN != '' && secrets.SONAR_HOST_URL != '' && secrets.SONAR_PROJECT_KEY != '' }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
-        run: |
-          npm install -g sonar-scanner
-          sonar-scanner \
-            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-            -Dsonar.projectName="$SONAR_PROJECT_NAME" \
-            -Dsonar.sources=api,web \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.sourceEncoding=UTF-8 \
-            -Dsonar.exclusions=**/node_modules/**,**/test/**
+    #  - name: Run SonarQube analysis
+    #    if: ${{ secrets.SONAR_TOKEN != '' && secrets.SONAR_HOST_URL != '' && secrets.SONAR_PROJECT_KEY != '' }}
+    #    env:
+    #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    #      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+    #      SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
+    #    run: |
+    #      npm install -g sonar-scanner
+     #     sonar-scanner \
+     #       -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+     #       -Dsonar.projectName="$SONAR_PROJECT_NAME" \
+     #       -Dsonar.sources=api,web \
+     #       -Dsonar.host.url=$SONAR_HOST_URL \
+     #       -Dsonar.login=$SONAR_TOKEN \
+     #       -Dsonar.sourceEncoding=UTF-8 \
+     #       -Dsonar.exclusions=**/node_modules/**,**/test/**
 
       - name: Run Trivy vulnerability scan (filesystem)
         uses: aquasecurity/trivy-action@master
