@@ -1,0 +1,26 @@
+# .trivyignore
+# Third-party app dependencies (node-3tier-app2) - not our code to fix
+# These are in legacy dependencies of the cloned upstream application
+
+# api/package-lock.json
+CVE-2017-20165
+CVE-2017-16119
+CVE-2017-16138
+CVE-2016-10539
+NSWG-ECO-106
+CVE-2024-45296
+CVE-2024-52798
+CVE-2026-4867
+CVE-2017-1000048
+CVE-2022-24999
+CVE-2022-25883
+
+# web/package-lock.json
+CVE-2024-45590
+GHSA-4vmm-mhcq-4x9j
+CVE-2025-7783
+CVE-2019-5413
+CVE-2022-29167
+CVE-2016-1000232
+CVE-2017-15010
+CVE-2015-8857

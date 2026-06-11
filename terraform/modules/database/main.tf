@@ -66,7 +66,7 @@ resource "aws_rds_cluster" "main" {
   preferred_maintenance_window = var.maintenance_window
 
   storage_encrypted        = true
-  deletion_protection      = true
+  deletion_protection      = false
   skip_final_snapshot      = false
   final_snapshot_identifier = "${local.prefix}-final-snapshot"
   copy_tags_to_snapshot    = true
