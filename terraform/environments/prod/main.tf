@@ -75,7 +75,7 @@ module "ecs" {
   db_host            = module.database.cluster_endpoint
   db_name            = var.db_name
   db_secret_arn      = module.database.db_secret_arn
-  aws_region        = var.aws_region
+  aws_region         = var.aws_region
   web_cpu            = var.web_cpu
   web_memory         = var.web_memory
   api_cpu            = var.api_cpu
