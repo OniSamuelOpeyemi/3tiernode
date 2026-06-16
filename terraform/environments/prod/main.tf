@@ -7,11 +7,11 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "3teirnodeprod-sammy-bucket" # Replace with your aws_s3_bucket
+    bucket         = "3tiernode-emmaus-backend"  # Replace with your aws_s3_bucket
     key            = "prod/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "3teirnodeprod-sammy-table" # Replace with your DynamoDB table
+    # use_lockfile   = true  # Replace with your DynamoDB table
   }
 }
 
