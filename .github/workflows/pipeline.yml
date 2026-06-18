@@ -73,6 +73,7 @@ jobs:
           DB: testdb
           DBUSER: postgres
           DBPASS: rootpassword
+          DB_SSL: false  # Set to true if using SSL for Postgres connection
 
       - name: Run api integration tests
         working-directory: api
@@ -84,6 +85,7 @@ jobs:
           DB: testdb
           DBUSER: postgres
           DBPASS: rootpassword
+          DB_SSL: false  # Set to true if using SSL for Postgres connection
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4
