@@ -336,7 +336,7 @@ resource "aws_ecs_task_definition" "web" {
     environment = [
       { name = "NODE_ENV",  value = "production" },
       { name = "PORT",      value = tostring(var.web_port) },
-      { name = "API_URL",   value = "http://${var.api_alb_dns_placeholder}" }
+      { name = "API_HOST",   value = "http://${aws_lb.api.dns_name}" }
     ]
     logConfiguration = {
       logDriver = "awslogs"
