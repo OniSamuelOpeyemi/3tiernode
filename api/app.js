@@ -10,7 +10,7 @@ const conString = {
     host: process.env.DBHOST,
     port: process.env.DBPORT,
     ssl: {
-        rejectUnauthorized: false    // ← add this
+        rejectUnauthorized: false    // ← This is important for connecting to Heroku Postgres
     }
 };       
 
