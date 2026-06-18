@@ -91,6 +91,12 @@ resource "aws_iam_role_policy" "ecs_task_cloudwatch" {
   })
 }
 
+# Allow ECS tasks to use SSM (required for ECS Exec)
+resource "aws_iam_role_policy_attachment" "ecs_task_ssm" {
+  role       = aws_iam_role.ecs_task.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 # Security Groups (For ALBs)
 resource "aws_security_group" "web_alb" {
   name        = "${local.prefix}-web-alb-sg"
@@ -341,7 +347,7 @@ resource "aws_ecs_task_definition" "web" {
       }
     }
     healthCheck = {
-      command     = ["CMD-SHELL", "curl -f http://localhost:${var.web_port}/health || exit 1"]
+      command     = ["CMD-SHELL", "wget -qO- http://localhost:${var.web_port}/health || exit 1"]
       interval    = 30
       timeout     = 5
       retries     = 3
@@ -389,7 +395,7 @@ resource "aws_ecs_task_definition" "api" {
       }
     }
     healthCheck = {
-      command     = ["CMD-SHELL", "curl -f http://localhost:${var.api_port}/health || exit 1"]
+      command     = ["CMD-SHELL", "wget -qO- http://localhost:${var.api_port}/health || exit 1"]
       interval    = 30
       timeout     = 5
       retries     = 3

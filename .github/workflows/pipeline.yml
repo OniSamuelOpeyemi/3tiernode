@@ -290,7 +290,7 @@ jobs:
           service:                   ${{ env.WEB_SERVICE }}
           cluster:                   ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-          wait-for-minutes:          10
+          wait-for-minutes:          15
           force-new-deployment:      true
 
       # Deploy api service 
@@ -315,8 +315,32 @@ jobs:
           service:                   ${{ env.API_SERVICE }}
           cluster:                   ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-          wait-for-minutes:          10
+          wait-for-minutes:          15
           force-new-deployment:      true
+
+
+      - name: Check ECS service status
+        run: |
+          aws ecs describe-services \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --services ${{ env.WEB_SERVICE }} ${{ env.API_SERVICE }} \
+            --query 'services[*].[serviceName,status,desiredCount,runningCount,pendingCount,deployments[*].status]' \
+            --output table
+
+      - name: Check task logs for errors
+        run: |
+          TASK_ARN=$(aws ecs list-tasks \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --service-name ${{ env.WEB_SERVICE }} \
+            --query 'taskArns[0]' \
+            --output text)
+          
+          if [ ! -z "$TASK_ARN" ] && [ "$TASK_ARN" != "None" ]; then
+            aws ecs describe-tasks \
+              --cluster ${{ env.ECS_CLUSTER }} \
+              --tasks $TASK_ARN \
+              --query 'tasks[0].[lastStatus,stopCode,stoppedReason]'
+          fi
 
       # ── Post-deploy smoke test ──────────────────────────────────────────────
       - name: Smoke test web
