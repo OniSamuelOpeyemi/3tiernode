@@ -1,7 +1,7 @@
 # Node 3-Tier CD Architecture on AWS
 
 
-![architecture](./doc/Toptal.png)
+![architecture](./doc/architecture.png)
 
 
 A production-grade, fully automated CI/CD architecture for a 3-tier Node.js application running on AWS ECS Fargate with CloudFront CDN, Aurora PostgreSQL, and GitHub Actions.
@@ -154,9 +154,9 @@ Save protection rules
 
 ---
 
-Use [Guide](./doc/guide.md) for more detailed guide and operational scripts.
+Use [guide.md](./doc/guide.md) for more detailed guide and operational scripts.
 
-For troubleshooting documentation, check [troubleshootin](./doc/3tiernode-troubleshooting.pdf)
+For troubleshooting documentation, check [3tiernode-troubleshooting.pdf](./doc/3tiernode-troubleshooting.pdf)
 
 
 Enjoy!!!
